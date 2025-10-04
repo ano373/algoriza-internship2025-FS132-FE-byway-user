@@ -5,7 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import Signup_illustration from "@/assets/Signup_illustration.jpg";
 import type { SignUpRequest, SignUpRequestError } from "@/types/auth";
 import { useNavigate } from "react-router";
-import { validateUser } from "@/validators/userValidator";
+import { validateUser } from "@/lib/validators/userValidator";
 import { useSignUp } from "@/hooks/useAuth";
 
 export default function SignUpPage() {

@@ -9,12 +9,13 @@ import { ProtectedRoute } from "./components/ProtectedRoute.tsx";
 import TestPage from "./pages/TestPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import SignUpPage from "./pages/SignUpPage.tsx";
+import { LandingPage } from "./pages/LandingPage.tsx";
 
 const router = createBrowserRouter([
   {
     element: <LayoutWithHeader />,
     children: [
-      // { path: "/", element: <LandingPage /> },
+      { path: "/", element: <LandingPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignUpPage /> },
       {
