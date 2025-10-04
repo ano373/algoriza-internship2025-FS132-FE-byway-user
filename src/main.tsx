@@ -4,17 +4,19 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-import Login from "./pages/Login.tsx";
 import { LayoutWithHeader } from "./components/UI/LayoutWithHeader.tsx";
-import { ProtectedRoute } from "./components/UI/ProtectedRoute.tsx";
+import { ProtectedRoute } from "./components/ProtectedRoute.tsx";
 import TestPage from "./pages/TestPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import SignUpPage from "./pages/SignUpPage.tsx";
 
 const router = createBrowserRouter([
   {
     element: <LayoutWithHeader />,
     children: [
       // { path: "/", element: <LandingPage /> },
-      { path: "/login", element: <Login /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/signup", element: <SignUpPage /> },
       {
         path: "/testpage",
         element: (

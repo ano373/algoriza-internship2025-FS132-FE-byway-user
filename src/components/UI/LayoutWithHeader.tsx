@@ -5,7 +5,7 @@ export function LayoutWithHeader() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-      <main className="flex-1 m-0 p-0">
+      <main className="flex-1">
         <Outlet />
       </main>
     </div>

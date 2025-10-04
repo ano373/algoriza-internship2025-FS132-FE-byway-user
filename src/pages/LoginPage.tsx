@@ -4,10 +4,10 @@ import { FormField } from "@components/UI/FormField";
 import { useLogin } from "@/hooks/useAuth";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { isEmail } from "@/lib/helpers";
-import SocailMediaSection from "@/components/UI/StaticUI/SocailMediaSection";
+import { isValidEmail } from "@/lib/helpers";
+import SocailMediaSection from "@/components/UI/StaticSections/SocailMediaSection";
 
-export default function Login() {
+export default function LoginPage() {
   const loginMutation = useLogin();
   const [identifier, SetIdentifier] = useState<string>("");
   const [password, SetPassword] = useState<string>("");
@@ -26,7 +26,7 @@ export default function Login() {
     if (!identifier.trim()) {
       newErrors.identifier = "Email or username is required.";
     } else {
-      if (!isEmail(identifier)) {
+      if (!isValidEmail(identifier)) {
         newErrors.identifier = "Enter a valid email or username.";
       }
     }
@@ -39,7 +39,7 @@ export default function Login() {
       return;
     }
 
-    const payload = isEmail(identifier)
+    const payload = isValidEmail(identifier)
       ? { email: identifier, password }
       : { username: identifier, password };
 
@@ -54,7 +54,7 @@ export default function Login() {
       <div className="flex-1 flex items-center justify-center pl-20">
         <div className="w-full max-w-xl">
           <h1 className="text-4xl font-bold mb-12 mt-32 text-center">
-            Sign in to your account
+            LogIn to your account
           </h1>
 
           <form className="space-y-8">
@@ -81,7 +81,7 @@ export default function Login() {
               onClick={handleSubmit}
               className="primary-black-button w-full py-4 text-xl flex items-center justify-center gap-2"
             >
-              Sign in
+              LogIn
               <FaArrowRightLong />
             </button>
           </form>

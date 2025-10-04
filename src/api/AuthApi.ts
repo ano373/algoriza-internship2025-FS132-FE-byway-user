@@ -5,7 +5,7 @@ import type {
   SignUpResponse,
   SignUpRequest,
   UserResponse,
-} from "@/types/user";
+} from "@/types/auth";
 
 async function LogIn(payload: LoginRequest): Promise<LoginResponse> {
   const response = await http.post<LoginResponse>("/auth/login", payload, {

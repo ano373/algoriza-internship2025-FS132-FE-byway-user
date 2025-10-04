@@ -1,17 +1,19 @@
 import type { ApiResponse } from "./general";
 
 export type SignUpRequest = {
-  Email: string;
+  email: string;
   userName: string;
   password: string;
+  confirmPassword: string;
   firstName: string;
   lastName: string;
 };
+export type SignUpRequestError = Partial<Record<keyof SignUpRequest, string>>;
 
 type SignUp = {
   userId: number;
   email: string;
-  jwtToken: string | null;
+  jwtToken: string;
 };
 export type SignUpResponse = ApiResponse<SignUp>;
 
@@ -24,7 +26,7 @@ export type LoginRequest = {
 type LogIn = {
   userId: number;
   email: string;
-  jwtToken: string | null;
+  jwtToken: string;
 };
 export type LoginResponse = ApiResponse<LogIn>;
 

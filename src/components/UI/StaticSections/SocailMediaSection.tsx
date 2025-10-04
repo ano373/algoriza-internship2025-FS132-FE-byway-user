@@ -2,7 +2,7 @@ import { FaFacebook, FaGoogle, FaMicrosoft } from "react-icons/fa6";
 
 export default function SocailMediaSection() {
   return (
-    <div className="flex gap-8 justify-around">
+    <div className="flex flex-wrap gap-7 justify-center">
       <a
         href="https://facebook.com"
         className="flex items-center gap-3 p-5 border border-gray-300 rounded-md hover:bg-gray-50 transition"
