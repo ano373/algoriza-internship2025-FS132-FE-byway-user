@@ -1,9 +1,54 @@
 import login_illustration from "@/assets/login_illustration.jpg";
-
-import { FaFacebook, FaGoogle, FaMicrosoft } from "react-icons/fa";
+import { FaArrowRightLong } from "react-icons/fa6";
 import { FormField } from "@components/UI/FormField";
+import { useLogin } from "@/hooks/useAuth";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { isEmail } from "@/lib/helpers";
+import SocailMediaSection from "@/components/UI/StaticUI/SocailMediaSection";
 
 export default function Login() {
+  const loginMutation = useLogin();
+  const [identifier, SetIdentifier] = useState<string>("");
+  const [password, SetPassword] = useState<string>("");
+  const [errors, setErrors] = useState<{
+    identifier?: string;
+    password?: string;
+  }>({});
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors: typeof errors = {};
+
+    if (!identifier.trim()) {
+      newErrors.identifier = "Email or username is required.";
+    } else {
+      if (!isEmail(identifier)) {
+        newErrors.identifier = "Enter a valid email or username.";
+      }
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "Password is required.";
+    }
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    const payload = isEmail(identifier)
+      ? { email: identifier, password }
+      : { username: identifier, password };
+
+    setErrors({});
+    loginMutation.mutate(payload, {
+      onSuccess: () => navigate("/testpage"),
+    });
+  };
+
   return (
     <div className="flex h-screen">
       <div className="flex-1 flex items-center justify-center pl-20">
@@ -13,15 +58,19 @@ export default function Login() {
           </h1>
 
           <form className="space-y-8">
-            <FormField label="Email">
+            <FormField error={errors.identifier} label="Email">
               <input
+                onChange={(e) => SetIdentifier(e.target.value)}
+                placeholder="Username or Email ID"
                 type="email"
                 className="w-full px-5 py-4 text-xl border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
               />
             </FormField>
 
-            <FormField label="Password">
+            <FormField error={errors.password} label="Password">
               <input
+                onChange={(e) => SetPassword(e.target.value)}
+                placeholder="Enter Password"
                 type="password"
                 className="w-full px-5 py-4 text-xl border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
               />
@@ -29,9 +78,11 @@ export default function Login() {
 
             <button
               type="submit"
-              className="primary-black-button w-full py-4 text-xl"
+              onClick={handleSubmit}
+              className="primary-black-button w-full py-4 text-xl flex items-center justify-center gap-2"
             >
               Sign in
+              <FaArrowRightLong />
             </button>
           </form>
 
@@ -41,37 +92,7 @@ export default function Login() {
             <div className="flex-1 border-t border-gray-300"></div>
           </div>
 
-          <div className="flex gap-8 justify-around">
-            <a
-              href="https://facebook.com"
-              className="flex items-center gap-3 p-5 border border-gray-300 rounded-md hover:bg-gray-50 transition"
-            >
-              <FaFacebook className="text-4xl text-[#1877F2]" />
-              <span className="text-xl font-semibold text-[#1877F2]">
-                Facebook
-              </span>
-            </a>
-
-            <a
-              href="https://google.com"
-              className="flex items-center gap-3 p-5 border border-gray-300 rounded-md hover:bg-gray-50 transition"
-            >
-              <FaGoogle className="text-4xl text-[#DB4437]" />
-              <span className="text-xl font-semibold text-[#DB4437]">
-                Google
-              </span>
-            </a>
-
-            <a
-              href="https://microsoft.com"
-              className="flex items-center gap-3 p-5 border border-gray-300 rounded-md hover:bg-gray-50 transition"
-            >
-              <FaMicrosoft className="text-4xl text-[#00A4EF]" />
-              <span className="text-xl font-semibold text-[#00A4EF]">
-                Microsoft
-              </span>
-            </a>
-          </div>
+          <SocailMediaSection />
         </div>
       </div>
 

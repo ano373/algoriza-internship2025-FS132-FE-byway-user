@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login.tsx";
 import { LayoutWithHeader } from "./components/UI/LayoutWithHeader.tsx";
+import { ProtectedRoute } from "./components/UI/ProtectedRoute.tsx";
+import TestPage from "./pages/TestPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,14 @@ const router = createBrowserRouter([
     children: [
       // { path: "/", element: <LandingPage /> },
       { path: "/login", element: <Login /> },
+      {
+        path: "/testpage",
+        element: (
+          <ProtectedRoute>
+            <TestPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   { path: "/404", element: <div>404 Not Found page</div> },
