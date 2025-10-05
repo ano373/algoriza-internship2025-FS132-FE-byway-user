@@ -18,7 +18,6 @@ export function StatsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Use Intersection Observer API to trigger animation
   useEffect(() => {
     const observer = new window.IntersectionObserver(
       (entries) => {

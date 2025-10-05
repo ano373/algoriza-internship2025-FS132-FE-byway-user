@@ -1,6 +1,6 @@
 import { useUser } from "@/hooks/useAuth";
 import { Navigate, useLocation } from "react-router";
-import { LoadingSpinner } from "./UI/LoadingSpinner";
+import { LoadingSpinner } from "@components/UI/LoadingSpinner";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { data: user, isLoading } = useUser();

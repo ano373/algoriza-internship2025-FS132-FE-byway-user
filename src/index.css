@@ -4,6 +4,21 @@
   font-family: "IBM Plex Sans Arabic", sans-serif;
 }
 
+@layer base {
+  :root {
+    --color-primary: #eef2ff;
+  }
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+}
+
 @layer components {
   .primary-red-button {
     @apply px-6 py-4 rounded-lg bg-red-400 text-white text-lg hover:bg-gray-800 duration-200 transition-colors;
