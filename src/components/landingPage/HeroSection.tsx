@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import hero_illustration from "@/assets/hero_illustration.png";
 export function HeroSection() {
   return (
