@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import Header from "./Header";
 import Footer from "./Footer";
 
-export function LayoutWithHeader() {
+export function LayoutWith_Header_Footer() {
   return (
     <div className="flex flex-col h-screen">
       <Header />

@@ -23,11 +23,17 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (response) => {
     if (["post", "put", "delete"].includes(response.config.method || "")) {
-      toast.success(response.data?.value.message || "Success!");
+      toast.success(response.data?.value?.message || "Success!");
     }
     return response;
   },
   (error) => {
+    const url = error.config?.url || "";
+
+    if (url.includes("/auth/me")) {
+      return Promise.reject(error);
+    }
+
     const errors = error.response?.data?.errors;
 
     if (errors && typeof errors === "object") {

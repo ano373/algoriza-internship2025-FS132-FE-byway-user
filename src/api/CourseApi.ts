@@ -1,4 +1,5 @@
 import { http } from "../lib/http";
+import qs from "qs";
 import type { CourseParameters, CourseSummaryResponse } from "@/types/course";
 
 // async function fetchCourseById(
@@ -11,9 +12,14 @@ import type { CourseParameters, CourseSummaryResponse } from "@/types/course";
 async function fetchCourses(
   params?: CourseParameters
 ): Promise<CourseSummaryResponse> {
-  const response = await http.get<CourseSummaryResponse>(`/courses`, {
-    params: params,
+  const queryString = qs.stringify(params, {
+    arrayFormat: "repeat",
+    skipNulls: true,
   });
+
+  const response = await http.get<CourseSummaryResponse>(
+    `/courses?${queryString}`
+  );
   return response.data;
 }
 

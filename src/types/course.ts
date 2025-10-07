@@ -57,14 +57,27 @@ export type CourseParameters = {
   page?: number;
   limit?: number;
   search?: string;
-  categoryIds?: string[];
-  maxLessonCount?: number;
-  maxPrice?: number;
-  minLessonCount?: number;
-  minPrice?: number;
-  minRating?: number;
+  categoryIds?: number[];
+  maxLessonCount: number | null;
+  maxPrice: number | null;
+  minLessonCount: number | null;
+  minPrice: number | null;
+  minRating: number | null;
   sortBy?: string;
   sortOrder?: string;
+};
+
+type Filters = {
+  rating: number | null;
+  price: {
+    min: number | null;
+    max: number | null;
+  };
+  categories: number[];
+  lessons: {
+    min: number | null;
+    max: number | null;
+  };
 };
 
 export const Levels = createEnumConfig([
@@ -75,3 +88,18 @@ export const Levels = createEnumConfig([
 ] as const);
 
 export type Level = (typeof Levels.values)[number];
+
+export function mapFiltersToCourseParameters(
+  filters: Filters,
+  additionalParams?: Partial<CourseParameters>
+): CourseParameters {
+  return {
+    categoryIds: filters.categories.length > 0 ? filters.categories : undefined,
+    maxLessonCount: filters.lessons.max,
+    minLessonCount: filters.lessons.min,
+    maxPrice: filters.price.max,
+    minPrice: filters.price.min,
+    minRating: filters.rating,
+    ...additionalParams,
+  };
+}
