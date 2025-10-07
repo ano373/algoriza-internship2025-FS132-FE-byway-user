@@ -45,7 +45,7 @@ export function useCart() {
   return useQuery<GetCartResponse>({
     queryKey: ["cart"],
     queryFn: CartApi.GetCart,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 1, // 1 minutes
   });
 }
 
@@ -53,6 +53,6 @@ export function useCartCount() {
   return useQuery<CartCountResponse>({
     queryKey: ["cartCount"],
     queryFn: CartApi.GetCartCount,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 1, // 1 minutes
   });
 }

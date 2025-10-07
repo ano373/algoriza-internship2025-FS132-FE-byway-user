@@ -92,3 +92,23 @@ export function mapFiltersToCourseParameters(
     ...additionalParams,
   };
 }
+
+export function convertToCourseSummaries(
+  courses: CourseDetailsResponse[]
+): CourseSummary[] {
+  return courses.map((courseResponse) => {
+    const course = courseResponse.value;
+    return {
+      courseId: course.courseId,
+      title: course.title,
+      instructorName: course.instructor.name,
+      categoryName: course.category.name,
+      level: course.level,
+      rating: course.rating,
+      totalDurationMinutes: course.totalDurationMinutes,
+      totalLessonCount: course.totalLessonCount,
+      price: course.price,
+      thumbnailUrl: course.thumbnailUrl,
+    };
+  });
+}

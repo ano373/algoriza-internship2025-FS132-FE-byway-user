@@ -6,13 +6,15 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { LayoutWith_Header_Footer } from "./components/UI/LayoutWith_Header_Footer.tsx";
 import { ProtectedRoute } from "@components/UI/ProtectedRoute.tsx";
-import TestPage from "./pages/TestPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import SignUpPage from "./pages/SignUpPage.tsx";
 import { LandingPage } from "./pages/LandingPage.tsx";
 import { CourseListPage } from "./pages/CourseListPage.tsx";
 import { LayoutWith_Header } from "./components/UI/LayoutWith_Header.tsx";
 import CoursePage from "./pages/CoursePage.tsx";
+import CartPage from "./pages/CartPage.tsx";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
+import CheckOutPage from "./pages/CheckOutPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,13 +24,22 @@ const router = createBrowserRouter([
       { path: "/courses", element: <CourseListPage /> },
       { path: "/courses/:id", element: <CoursePage /> },
       {
-        path: "/testpage",
+        path: "/cart",
         element: (
           <ProtectedRoute>
-            <TestPage />
+            <CartPage />
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/checkout",
+        element: (
+          <ProtectedRoute>
+            <CheckOutPage />
+          </ProtectedRoute>
+        ),
+      },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
   {
@@ -38,7 +49,6 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUpPage /> },
     ],
   },
-  { path: "/404", element: <div>404 Not Found page</div> },
 ]);
 
 const queryClient = new QueryClient();

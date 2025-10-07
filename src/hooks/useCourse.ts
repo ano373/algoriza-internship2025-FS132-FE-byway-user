@@ -18,3 +18,14 @@ export function useCourse(id: number, options?: { enabled?: boolean }) {
     staleTime: 5 * 60 * 1000,
   });
 }
+
+export function useCoursesBatch(ids: number[]) {
+  return useQuery({
+    queryKey: ["courses", "batch", ids],
+    queryFn: async () => {
+      const results = await Promise.all(ids.map((id) => CourseApi.getById(id)));
+      return results;
+    },
+    enabled: ids.length > 0,
+  });
+}

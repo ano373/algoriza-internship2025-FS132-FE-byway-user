@@ -46,6 +46,7 @@ export function useLogout() {
   return () => {
     localStorage.removeItem("jwtToken");
     queryClient.setQueryData(["user"], null);
+    queryClient.invalidateQueries({ queryKey: ["cart"] });
     queryClient.invalidateQueries({ queryKey: ["cartCount"] });
     navigate("/");
   };

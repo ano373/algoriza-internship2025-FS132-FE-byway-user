@@ -2,7 +2,7 @@ import { CourseBreadcrumb } from "@/components/Course/CourseBreadScrumb";
 import { ErrorMessage } from "@/components/UI/ErrorMessage";
 import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
 import { useCourse } from "@/hooks/useCourse";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import ReactMarkdown from "react-markdown";
 import { StarRating } from "@/components/UI/StarRating";
 import { FaStar, FaUserGraduate } from "react-icons/fa6";
@@ -16,11 +16,15 @@ import { useAddCartItem, useCart } from "@/hooks/useCart";
 
 export default function CoursePage() {
   const { id } = useParams();
+
+  const courseId = id ? parseInt(id, 10) : NaN;
+  const isValidId = !isNaN(courseId) && courseId > 0;
+
   const {
     data: courseDetailsResponse,
     isLoading,
     error,
-  } = useCourse(Number(id));
+  } = useCourse(courseId, { enabled: isValidId });
   const course = courseDetailsResponse?.value;
 
   const navigate = useNavigate();
@@ -76,6 +80,10 @@ export default function CoursePage() {
       navigate("/cart");
     }
   };
+
+  if (!isValidId) {
+    return <Navigate to="/404" replace />;
+  }
 
   if (isLoading) {
     return <LoadingSpinner message="Loading course details..." />;
