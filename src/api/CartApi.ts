@@ -55,7 +55,6 @@ async function GetCartCount(): Promise<CartCountResponse> {
   return response.data;
 }
 
-// CartApi.ts
 export const CartApi = {
   AddCart,
   PurchaseCart,

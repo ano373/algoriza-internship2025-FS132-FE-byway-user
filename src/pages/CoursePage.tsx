@@ -2,7 +2,7 @@ import { CourseBreadcrumb } from "@/components/Course/CourseBreadScrumb";
 import { ErrorMessage } from "@/components/UI/ErrorMessage";
 import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
 import { useCourse } from "@/hooks/useCourse";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ReactMarkdown from "react-markdown";
 import { StarRating } from "@/components/UI/StarRating";
 import { FaStar, FaUserGraduate } from "react-icons/fa6";
@@ -10,6 +10,9 @@ import { FaPlayCircle } from "react-icons/fa";
 import ReviewsSection from "@/components/Course/ReviewsSection";
 import CourseSection from "@/components/UI/CourseSection";
 import { PurchaseCard } from "@/components/Course/PurchaseCard";
+import toast from "react-hot-toast";
+import { useUser } from "@/hooks/useAuth";
+import { useAddCartItem, useCart } from "@/hooks/useCart";
 
 export default function CoursePage() {
   const { id } = useParams();
@@ -20,23 +23,66 @@ export default function CoursePage() {
   } = useCourse(Number(id));
   const course = courseDetailsResponse?.value;
 
+  const navigate = useNavigate();
+
+  const { data: userResponse } = useUser();
+  const user = userResponse?.value;
+
+  const { data: cartResponse } = useCart();
+  const cart = cartResponse?.value;
+
+  const addCartItemMutation = useAddCartItem();
+
+  const courseInCart =
+    course?.courseId !== undefined
+      ? cart?.courseIds?.includes(course.courseId)
+      : false;
+
+  const isAddToCartDisabled = courseInCart;
+  const isBuyNowDisabled = !course?.courseId;
+
+  const handleAuthRequired = () => {
+    toast.error("You have to sign in to perform this action");
+    navigate("/login");
+  };
+
+  const handleAddToCart = () => {
+    if (!user) {
+      handleAuthRequired();
+      return;
+    }
+
+    if (course?.courseId) {
+      addCartItemMutation.mutate({ courseId: course.courseId });
+    }
+  };
+
+  const handleBuyNow = () => {
+    if (!user) {
+      handleAuthRequired();
+      return;
+    }
+
+    if (course?.courseId && !courseInCart) {
+      addCartItemMutation.mutate(
+        { courseId: course.courseId },
+        {
+          onSuccess: () => {
+            navigate("/cart");
+          },
+        }
+      );
+    } else if (courseInCart) {
+      navigate("/cart");
+    }
+  };
+
   if (isLoading) {
     return <LoadingSpinner message="Loading course details..." />;
   }
 
   if (error) {
     return <ErrorMessage message="Failed to load the course" />;
-  }
-  function handleAddToCart(): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function handleBuyNow(): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function handleAuthRequired(): void {
-    throw new Error("Function not implemented.");
   }
 
   return (
@@ -45,12 +91,12 @@ export default function CoursePage() {
         <div className="absolute top-0 right-20 z-50">
           <PurchaseCard
             price={course?.price}
-            courseThumbnailUrl={course?.thumbnailUrl || ""}
+            courseThumbnailUrl={course?.thumbnailUrl || "Course preview"}
             onAddToCart={handleAddToCart}
             onBuyNow={handleBuyNow}
             onAuthRequired={handleAuthRequired}
-            // isAddToCartDisabled={isAddToCartDisabled}
-            // isBuyNowDisabled={isBuyNowDisabled}
+            isAddToCartDisabled={isAddToCartDisabled}
+            isBuyNowDisabled={isBuyNowDisabled}
           />
         </div>
         <div className=" ml-10 p-4 bg-[#f8fafc] bg-clip-padding">
@@ -59,11 +105,11 @@ export default function CoursePage() {
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
               {course?.title}
             </h1>
-            <p className="text-lg text-gray-700 leading-relaxed max-w-4xl">
+            <div className="text-lg text-gray-700 leading-relaxed max-w-4xl">
               <div className="prose max-w-4xl">
                 <ReactMarkdown>{course?.description}</ReactMarkdown>
               </div>
-            </p>
+            </div>
           </div>
           <div className=" w-1/2 h-full mt-5">
             <div className="text-gray-600">
@@ -196,9 +242,9 @@ export default function CoursePage() {
                 </div>
               </div>
 
-              <p className="text-gray-600 mt-4 text-sm leading-relaxed">
+              <div className="text-gray-600 mt-4 text-sm leading-relaxed">
                 <ReactMarkdown>{course?.instructor.description}</ReactMarkdown>
-              </p>
+              </div>
             </div>
           </div>
 
@@ -233,10 +279,10 @@ export default function CoursePage() {
             <ReviewsSection />
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-2 mt-6">
-              More Courses like this
-            </h2>
-            <CourseSection categoryId={course?.category.categoryId} />
+            <CourseSection
+              header="More Courses like this"
+              categoryId={course?.category.categoryId}
+            />
           </div>
         </div>
       </div>

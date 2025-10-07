@@ -12,7 +12,7 @@ export function LandingPage() {
       <HeroSection />
       <StatsSection />
       <CategorySection />
-      <CourseSection />
+      <CourseSection header="Top Courses" />
       <InstrcutorSection />
       <CustomerReviewSection />
       <CallToActionSection />

@@ -29,12 +29,9 @@ http.interceptors.response.use(
   },
   (error) => {
     const url = error.config?.url || "";
+    const excludedEndpoints = ["/auth/me", "/cart", "/cart/count"];
 
-    if (
-      url.includes("/auth/me") ||
-      url.includes("/cart") ||
-      url.includes("/cart/count")
-    ) {
+    if (excludedEndpoints.some((endpoint) => url === endpoint)) {
       return Promise.reject(error);
     }
 

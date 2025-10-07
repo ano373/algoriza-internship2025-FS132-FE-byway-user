@@ -6,10 +6,14 @@ import CourseCard from "./CourseCard";
 import { Link, useNavigate } from "react-router";
 
 interface CourseSectionProps {
+  header?: string;
   categoryId?: number;
 }
 
-export default function CourseSection({ categoryId }: CourseSectionProps) {
+export default function CourseSection({
+  header,
+  categoryId,
+}: CourseSectionProps) {
   const courseParams: CourseParameters = {
     limit: 4,
     sortBy: "rating",
@@ -45,7 +49,7 @@ export default function CourseSection({ categoryId }: CourseSectionProps) {
   return (
     <section className="w-full px-4 py-12">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-bold pl-15 text-gray-900">Top Courses</h2>
+        <h2 className="text-3xl font-bold pl-15 text-gray-900">{header}</h2>
         <Link
           to="/courses"
           className=" mr-4 text-blue-600 hover:text-blue-800 font-medium"
