@@ -10,6 +10,8 @@ export function useLogin() {
     onSuccess: (data) => {
       localStorage.setItem("jwtToken", data.value.jwtToken ?? "");
       queryClient.setQueryData(["user"], data.value);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["cartCount"] });
     },
   });
 }
@@ -21,6 +23,8 @@ export function useSignUp() {
     onSuccess: (data) => {
       localStorage.setItem("jwtToken", data.value.jwtToken ?? "");
       queryClient.setQueryData(["user"], data.value);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["cartCount"] });
     },
   });
 }
@@ -42,6 +46,7 @@ export function useLogout() {
   return () => {
     localStorage.removeItem("jwtToken");
     queryClient.setQueryData(["user"], null);
+    queryClient.invalidateQueries({ queryKey: ["cartCount"] });
     navigate("/");
   };
 }

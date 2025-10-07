@@ -30,7 +30,11 @@ http.interceptors.response.use(
   (error) => {
     const url = error.config?.url || "";
 
-    if (url.includes("/auth/me")) {
+    if (
+      url.includes("/auth/me") ||
+      url.includes("/cart") ||
+      url.includes("/cart/count")
+    ) {
       return Promise.reject(error);
     }
 

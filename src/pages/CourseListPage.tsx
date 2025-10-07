@@ -28,6 +28,11 @@ export function CourseListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    const urlSearch = searchParams.get("search") || "";
+    setSearch(urlSearch);
+  }, [searchParams]);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedFilters(filters);
     }, 600);
@@ -36,7 +41,7 @@ export function CourseListPage() {
   }, [filters]);
 
   useEffect(() => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams);
 
     const flatFilters = {
       rating: debouncedFilters.rating,
@@ -61,7 +66,7 @@ export function CourseListPage() {
     });
 
     setSearchParams(params, { replace: true });
-  }, [debouncedFilters, pagination, setSearchParams]);
+  }, [debouncedFilters, pagination, searchParams, setSearchParams]);
 
   const courseParams = mapFiltersToCourseParameters(debouncedFilters, {
     page: pagination.page,
