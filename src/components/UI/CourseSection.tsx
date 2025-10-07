@@ -1,15 +1,25 @@
 import { useCourses } from "@/hooks/useCourse";
 import type { CourseParameters } from "@/types/course";
-import { LoadingSpinner } from "../UI/LoadingSpinner";
-import { ErrorMessage } from "../UI/ErrorMessage";
-import CourseCard from "../UI/CourseCard";
+import { LoadingSpinner } from "./LoadingSpinner";
+import { ErrorMessage } from "./ErrorMessage";
+import CourseCard from "./CourseCard";
 import { Link, useNavigate } from "react-router";
 
-export default function CourseSection() {
+interface CourseSectionProps {
+  categoryId?: number;
+}
+
+export default function CourseSection({ categoryId }: CourseSectionProps) {
   const courseParams: CourseParameters = {
     limit: 4,
     sortBy: "rating",
     sortOrder: "desc",
+    maxLessonCount: null,
+    maxPrice: null,
+    minLessonCount: null,
+    minPrice: null,
+    minRating: null,
+    categoryIds: categoryId,
   };
 
   const {

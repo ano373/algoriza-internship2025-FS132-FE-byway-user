@@ -5,7 +5,7 @@ import { useLogin } from "@/hooks/useAuth";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { isValidEmail } from "@/lib/helpers";
-import SocailMediaSection from "@/components/UI/StaticSections/SocailMediaSection";
+import AuthMediaSection from "@components/UI/StaticSections/AuthMediaSection";
 
 export default function LoginPage() {
   const loginMutation = useLogin();
@@ -92,7 +92,7 @@ export default function LoginPage() {
             <div className="flex-1 border-t border-gray-300"></div>
           </div>
 
-          <SocailMediaSection />
+          <AuthMediaSection />
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import CallToActionSection from "@/components/landing/CallToActionSection";
 import { CategorySection } from "@/components/landing/CategorySection";
-import CourseSection from "@/components/landing/CourseSection";
+import CourseSection from "@/components/UI/CourseSection";
 import CustomerReviewSection from "@/components/landing/CustomerReviewSection";
 import { HeroSection } from "@/components/landing/HeroSection";
 import InstrcutorSection from "@/components/landing/InstrcutorSection";

@@ -12,6 +12,7 @@ import SignUpPage from "./pages/SignUpPage.tsx";
 import { LandingPage } from "./pages/LandingPage.tsx";
 import { CourseListPage } from "./pages/CourseListPage.tsx";
 import { LayoutWith_Header } from "./components/UI/LayoutWith_Header.tsx";
+import CoursePage from "./pages/CoursePage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <LandingPage /> },
       { path: "/courses", element: <CourseListPage /> },
+      { path: "/courses/:id", element: <CoursePage /> },
       {
         path: "/testpage",
         element: (

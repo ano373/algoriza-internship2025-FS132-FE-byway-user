@@ -1,13 +1,15 @@
 import { http } from "../lib/http";
 import qs from "qs";
-import type { CourseParameters, CourseSummaryResponse } from "@/types/course";
+import type {
+  CourseDetailsResponse,
+  CourseParameters,
+  CourseSummaryResponse,
+} from "@/types/course";
 
-// async function fetchCourseById(
-//   id: number
-// ): Promise<ApiResponse<CourseDetails>> {
-//   const response = await http.get<ApiResponse<CourseDetails>>(`/courses/${id}`);
-//   return response.data;
-// }
+async function fetchCourseById(id: number): Promise<CourseDetailsResponse> {
+  const response = await http.get<CourseDetailsResponse>(`/courses/${id}`);
+  return response.data;
+}
 
 async function fetchCourses(
   params?: CourseParameters
@@ -24,6 +26,6 @@ async function fetchCourses(
 }
 
 export const CourseApi = {
-  // getById: fetchCourseById,
+  getById: fetchCourseById,
   getAll: fetchCourses,
 };

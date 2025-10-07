@@ -1,5 +1,5 @@
 import { FormField } from "@/components/UI/FormField";
-import SocailMediaSection from "@/components/UI/StaticSections/SocailMediaSection";
+import authMediaSection from "@/components/UI/StaticSections/AuthMediaSection";
 import { useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Signup_illustration from "@/assets/Signup_illustration.jpg";
@@ -140,7 +140,7 @@ export default function SignUpPage() {
             <span className="px-4 text-gray-500 text-lg">Sign in with</span>
             <div className="flex-1 border-t border-gray-300"></div>
           </div>
-          <SocailMediaSection />
+          <authMediaSection />
         </div>
       </div>
     </div>

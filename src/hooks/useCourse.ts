@@ -10,10 +10,11 @@ export function useCourses(params?: CourseParameters) {
   });
 }
 
-// export function useCourse(id: number, options?: { enabled?: boolean }) {
-//   return useQuery({
-//     queryKey: ["course", id],
-//     queryFn: () => CourseApi.getById(id),
-//     enabled: options?.enabled !== undefined ? options.enabled : !!id,
-//   });
-// }
+export function useCourse(id: number, options?: { enabled?: boolean }) {
+  return useQuery({
+    queryKey: ["course", id],
+    queryFn: () => CourseApi.getById(id),
+    enabled: options?.enabled !== undefined ? options.enabled : !!id,
+    staleTime: 5 * 60 * 1000,
+  });
+}

@@ -1,35 +1,24 @@
 import { type ApiResponse } from "./general";
 import { createEnumConfig } from "@/lib/helpers";
+import type { Instructor } from "./Instrcutor";
+import type { Category } from "./category";
 
-// export interface CourseRequest {
-//   courseId: number;
-//   thumbnailUrl?: string;
-//   title: string;
-//   level: Level | "";
-//   rating: number;
-//   price: number;
-//   description: string;
-//   certification: string;
-//   instructorId: number;
-//   categoryId: number;
-//   sections: CourseSection[];
-// }
-
-// export type CourseDetails = {
-//   courseId: number;
-//   title: string;
-//   thumbnailUrl: string;
-//   level: Level;
-//   price: number;
-//   rating: number;
-//   totalLessonCount: number;
-//   totalDurationMinutes: number;
-//   description: string;
-//   certification: string;
-//   instructor: Instructor;
-//   category: Category;
-//   sections: CourseSection[];
-// };
+export type CourseDetails = {
+  courseId: number;
+  title: string;
+  thumbnailUrl: string;
+  level: Level;
+  price: number;
+  rating: number;
+  totalLessonCount: number;
+  totalDurationMinutes: number;
+  description: string;
+  certification: string;
+  instructor: Instructor;
+  category: Category;
+  sections: CourseSection[];
+};
+export type CourseDetailsResponse = ApiResponse<CourseDetails>;
 
 export type CourseSummary = {
   courseId: number;
@@ -57,7 +46,7 @@ export type CourseParameters = {
   page?: number;
   limit?: number;
   search?: string;
-  categoryIds?: number[];
+  categoryIds?: number[] | number;
   maxLessonCount: number | null;
   maxPrice: number | null;
   minLessonCount: number | null;

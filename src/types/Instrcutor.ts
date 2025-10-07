@@ -23,6 +23,7 @@ export interface Instructor {
   name: string;
   jobTitle: JobTitle;
   rating: number;
+  description: string;
   studentCount?: number;
 }
 export type InstructorsResponse = ApiResponse<Instructor[]>;

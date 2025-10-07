@@ -1,6 +1,6 @@
 import { FaFacebook, FaGoogle, FaMicrosoft } from "react-icons/fa6";
 
-export default function SocailMediaSection() {
+export default function AuthMediaSection() {
   return (
     <div className="flex flex-wrap gap-7 justify-center">
       <a
