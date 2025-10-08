@@ -6,11 +6,9 @@ export const http = axios.create({
   timeout: 5000,
 });
 
-const Admin_token = import.meta.env.VITE_ADMIN_TOKEN;
-
 http.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("jwtToken") || Admin_token;
+    const token = localStorage.getItem("jwtToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -44,7 +42,7 @@ http.interceptors.response.use(
         duration: 6000,
       });
     } else {
-      toast.error(error.response?.data?.message || "Server internal Error", {
+      toast.error(error.response?.data?.message || "Server unavailable", {
         id: "server-error",
         duration: 3000,
       });
