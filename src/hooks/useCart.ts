@@ -4,6 +4,8 @@ import type {
   CartCountResponse,
   DeleteCartItemRequest,
   GetCartResponse,
+  PaymentCardRequest,
+  purchaseCartResponse,
 } from "@/types/cart";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -33,7 +35,7 @@ export function useDeleteCartItem() {
 export function usePurchaseCart() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => CartApi.PurchaseCart(),
+    mutationFn: (payload: PaymentCardRequest) => CartApi.PurchaseCart(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
       queryClient.invalidateQueries({ queryKey: ["cartCount"] });

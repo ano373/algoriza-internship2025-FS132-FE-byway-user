@@ -6,6 +6,7 @@ import type {
   DeleteCartItemRequest,
   DeleteCartItemResponse,
   GetCartResponse,
+  PaymentCardRequest,
   purchaseCartResponse,
 } from "@/types/cart";
 
@@ -22,10 +23,16 @@ async function AddCart(
   return response.data;
 }
 
-async function PurchaseCart(): Promise<purchaseCartResponse> {
-  const response = await http.post<purchaseCartResponse>("/cart/purchase", {
-    headers: { "Content-Type": "application/json" },
-  });
+async function PurchaseCart(
+  payload: PaymentCardRequest
+): Promise<purchaseCartResponse> {
+  const response = await http.post<purchaseCartResponse>(
+    "/cart/purchase",
+    payload,
+    {
+      headers: { "Content-Type": "application/json" },
+    }
+  );
   return response.data;
 }
 

@@ -24,7 +24,14 @@ export type GetCartResponse = ApiResponse<GetCart>;
 export type CartCountResponse = ApiResponse<{ cartItemsCount: number }>;
 
 export type PaymentCardRequest = {
+  country: string;
+  state: string;
   cardNumber: string;
   cardHolderName: string;
   expiryDate: string;
+  cvv: string;
 };
+
+export type PaymentCardRequestError = Partial<
+  Record<keyof PaymentCardRequest, string>
+>;

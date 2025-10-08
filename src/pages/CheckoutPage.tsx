@@ -2,12 +2,16 @@ import { OrderDetails } from "@/components/Cart/OrderDetails";
 import { CheckoutBreadCrumb } from "@/components/Checkout/CheckoutBreadCrumb";
 import CourseTitleCard from "@/components/Checkout/CourseTitleCard";
 import PaymentForm from "@/components/Checkout/PaymentForm";
-import { useCart } from "@/hooks/useCart";
+import { useCart, usePurchaseCart } from "@/hooks/useCart";
 import { useCoursesBatch } from "@/hooks/useCourse";
+import { validatePaymentCard } from "@/lib/validators/paymentValidator";
+import type { PaymentCardRequest, PaymentCardRequestError } from "@/types/cart";
 import { convertToCourseSummaries } from "@/types/course";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function CheckoutPage() {
+  const purchaseCartMutation = usePurchaseCart();
   const { data: cartResponse } = useCart();
   const cart = cartResponse?.value;
   const courseIds = cart?.courseIds;
@@ -15,6 +19,35 @@ export default function CheckoutPage() {
   const { data: courses } = useCoursesBatch(courseIds || []);
   const courseSummaries = courses ? convertToCourseSummaries(courses) : [];
   const navigate = useNavigate();
+
+  const [errors, setErrors] = useState<PaymentCardRequestError>();
+  const [formData, setFormData] = useState<PaymentCardRequest>({
+    country: "",
+    state: "",
+    cardHolderName: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const errors = validatePaymentCard(formData);
+    setErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      setErrors({});
+      purchaseCartMutation.mutate(formData, {
+        onSuccess: () => navigate("/checkout/success"),
+      });
+    }
+  };
+
+  const handleChange = (field: keyof PaymentCardRequest, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
 
   return (
     <div className="flex-1 w-full min-h-screen px-6 py-8 bg-gray-50">
@@ -40,7 +73,13 @@ export default function CheckoutPage() {
 
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="flex-1 border border-blue-300 rounded-2xl shadow-sm p-6">
-              <PaymentForm />
+              <form id="payment-form" onSubmit={handleSubmit}>
+                <PaymentForm
+                  onChange={handleChange}
+                  errors={errors}
+                  formData={formData}
+                />
+              </form>
             </div>
 
             <div className="w-full lg:w-96 bg-white rounded-2xl shadow-sm p-6">
@@ -61,10 +100,11 @@ export default function CheckoutPage() {
                 total={cart.total}
               />
               <button
-                onClick={() => navigate("/checkout/success")}
+                type="submit"
+                form="payment-form"
                 className="primary-black-button w-full mt-5 py-3 rounded-xl"
               >
-                Checkout
+                Pay
               </button>
             </div>
           </div>

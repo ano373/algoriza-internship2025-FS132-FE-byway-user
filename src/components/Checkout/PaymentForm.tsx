@@ -1,24 +1,45 @@
 import { useState } from "react";
 import { FormField } from "../UI/FormField";
 import { RiVisaFill } from "react-icons/ri";
+import type { PaymentCardRequest, PaymentCardRequestError } from "@/types/cart";
 
-export default function PaymentForm() {
+interface PaymentFormProps {
+  onChange: (field: keyof PaymentCardRequest, value: string) => void;
+  errors?: PaymentCardRequestError;
+  formData: PaymentCardRequest;
+}
+
+export default function PaymentForm({
+  onChange,
+  errors,
+  formData,
+}: PaymentFormProps) {
   const [paymentMethod, setPaymentMethod] = useState<"card" | "paypal">("card");
+
+  const handleInputChange =
+    (field: keyof PaymentCardRequest) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(field, e.target.value);
+    };
 
   return (
     <div className="max-w-5xl w-full mx-auto p-6   rounded-lg ">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <FormField label="Country">
+        <FormField error={errors?.country} label="Country">
           <input
             type="text"
             placeholder="Enter Country"
+            value={formData.country}
+            onChange={handleInputChange("country")}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </FormField>
-        <FormField label="State/Union Territory">
+        <FormField error={errors?.state} label="State/Union Territory">
           <input
             type="text"
             placeholder="Enter State"
+            value={formData.state}
+            onChange={handleInputChange("state")}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </FormField>
@@ -49,36 +70,44 @@ export default function PaymentForm() {
 
         {paymentMethod === "card" && (
           <div className="space-y-4">
-            <FormField label="Name of Card">
+            <FormField error={errors?.cardHolderName} label="Name of Card">
               <input
                 type="text"
-                placeholder="Name of card"
+                placeholder="Card Holder Name"
+                value={formData.cardHolderName}
+                onChange={handleInputChange("cardHolderName")}
                 className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </FormField>
 
-            <FormField label="Card Number">
+            <FormField error={errors?.cardNumber} label="Card Number">
               <input
                 type="text"
                 placeholder="Card Number"
-                maxLength={16}
+                maxLength={19}
+                value={formData.cardNumber}
+                onChange={handleInputChange("cardNumber")}
                 className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </FormField>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField label="Expiry Date">
+              <FormField error={errors?.expiryDate} label="Expiry Date">
                 <input
                   type="text"
                   placeholder="MM/YY"
+                  value={formData.expiryDate}
+                  onChange={handleInputChange("expiryDate")}
                   maxLength={5}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </FormField>
-              <FormField label="CVC/CVV">
+              <FormField error={errors?.cvv} label="CVC/CVV">
                 <input
                   type="text"
-                  placeholder="CVC"
+                  placeholder="CVV"
+                  value={formData.cvv}
+                  onChange={handleInputChange("cvv")}
                   maxLength={4}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
