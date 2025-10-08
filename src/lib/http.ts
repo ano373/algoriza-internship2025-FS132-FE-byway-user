@@ -2,7 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 export const http = axios.create({
-  baseURL: "http://byway-fs132.runasp.net/api",
+  baseURL: "https://byway-fs132.runasp.net/api",
   timeout: 5000,
 });
 
