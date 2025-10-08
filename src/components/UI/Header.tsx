@@ -66,7 +66,7 @@ function Header() {
           <>
             <button
               onClick={handleCartClick}
-              className="relative p-2 text-[#334155] hover:text-[#1e293b] transition-colors"
+              className="relative p-2 text-[#334155] cursor-pointer hover:text-[#1e293b] transition-colors"
             >
               <FiShoppingCart size={24} />
               {typeof cart?.cartItemsCount === "number" &&
@@ -87,7 +87,7 @@ function Header() {
 
             <button
               onClick={logout}
-              className="p-2 text-[#334155] hover:text-[#1e293b] transition-colors"
+              className="p-2 text-[#334155] hover:text-[#1e293b] cursor-pointer transition-colors"
               title="Logout"
             >
               <FiLogOut size={24} />

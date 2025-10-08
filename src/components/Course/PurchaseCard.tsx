@@ -35,7 +35,7 @@ export function PurchaseCard({
           <button
             onClick={onAddToCart}
             disabled={isAddToCartDisabled}
-            className={`w-full primary-black-button transition-colors ${
+            className={`w-full primary-black-button cursor-pointer transition-colors ${
               isAddToCartDisabled
                 ? "bg-gray-400 cursor-not-allowed opacity-50"
                 : "hover:bg-gray-400"
@@ -47,7 +47,7 @@ export function PurchaseCard({
           <button
             onClick={onBuyNow}
             disabled={isBuyNowDisabled}
-            className={`w-full bg-white border-2 border-gray-800 py-3 px-4 rounded-lg font-medium transition-colors ${
+            className={`w-full bg-white border-2 border-gray-800 py-3 px-4 cursor-pointer rounded-lg font-medium transition-colors ${
               isBuyNowDisabled
                 ? "border-gray-200 text-gray-400 cursor-not-allowed opacity-50"
                 : "border-gray-300 text-gray-700 hover:bg-gray-50"

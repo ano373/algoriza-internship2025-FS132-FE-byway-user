@@ -23,7 +23,7 @@ export function CourseListPage() {
     page: 1,
     sortBy: "date",
     sortOrder: "desc",
-    limit: 12,
+    limit: 10,
   });
   const [searchParams, setSearchParams] = useSearchParams();
 

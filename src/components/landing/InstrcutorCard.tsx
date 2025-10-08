@@ -7,7 +7,7 @@ interface InstructorCardProps {
 
 export function InstructorCard({ instructor }: InstructorCardProps) {
   return (
-    <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg">
+    <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden  hover:shadow-lg">
       <div className="p-4">
         <div className="flex justify-center mb-3">
           <img

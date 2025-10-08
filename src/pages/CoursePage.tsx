@@ -164,7 +164,7 @@ export default function CoursePage() {
                   .getElementById("description")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
-              className="px-4 py-2  text-gray-700 border bg-blue-50  rounded hover:bg-blue-100 transition"
+              className="px-4 py-2  cursor-pointer text-gray-700 border bg-blue-50  rounded hover:bg-blue-100 transition"
             >
               Description
             </button>
@@ -174,7 +174,7 @@ export default function CoursePage() {
                   .getElementById("instructor")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
-              className="px-4 py-2 text-gray-700 bg-blue-50 rounded hover:bg-blue-100 transition"
+              className="px-4 py-2 cursor-pointer text-gray-700 bg-blue-50 rounded hover:bg-blue-100 transition"
             >
               Instructor
             </button>
@@ -184,7 +184,7 @@ export default function CoursePage() {
                   .getElementById("content")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
-              className="px-4 py-2 text-gray-700 bg-blue-50 rounded hover:bg-blue-100 transition"
+              className="px-4 py-2 cursor-pointer text-gray-700 bg-blue-50 rounded hover:bg-blue-100 transition"
             >
               Content
             </button>
@@ -194,7 +194,7 @@ export default function CoursePage() {
                   .getElementById("reviews")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
-              className="px-4 py-2 text-gray-700 bg-blue-50 rounded hover:bg-blue-100 transition"
+              className="px-4 py-2 cursor-pointer text-gray-700 bg-blue-50 rounded hover:bg-blue-100 transition"
             >
               Reviews
             </button>
