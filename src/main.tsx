@@ -15,6 +15,7 @@ import CoursePage from "./pages/CoursePage.tsx";
 import CartPage from "./pages/CartPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import CheckOutPage from "./pages/CheckoutPage.tsx";
+import CompleteOrderPage from "./pages/CompleteOrderPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <CheckOutPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/checkout/success",
+        element: (
+          <ProtectedRoute>
+            <CompleteOrderPage />
           </ProtectedRoute>
         ),
       },

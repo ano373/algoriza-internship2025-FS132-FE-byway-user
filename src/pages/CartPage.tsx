@@ -55,7 +55,9 @@ export default function CartPage() {
                 total={cart.total}
               />
               <button
-                onClick={() => navigate("/checkout")}
+                onClick={() =>
+                  navigate("/checkout", { state: { fromCart: true } })
+                }
                 className="primary-black-button w-full mt-4"
               >
                 Proceed to Checkout

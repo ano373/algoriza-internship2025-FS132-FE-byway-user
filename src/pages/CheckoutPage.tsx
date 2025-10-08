@@ -8,9 +8,11 @@ import { validatePaymentCard } from "@/lib/validators/paymentValidator";
 import type { PaymentCardRequest, PaymentCardRequestError } from "@/types/cart";
 import { convertToCourseSummaries } from "@/types/course";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 
 export default function CheckoutPage() {
+  const location = useLocation();
+
   const purchaseCartMutation = usePurchaseCart();
   const { data: cartResponse } = useCart();
   const cart = cartResponse?.value;
@@ -37,7 +39,8 @@ export default function CheckoutPage() {
     if (Object.keys(errors).length === 0) {
       setErrors({});
       purchaseCartMutation.mutate(formData, {
-        onSuccess: () => navigate("/checkout/success"),
+        onSuccess: () =>
+          navigate("/checkout/success", { state: { fromCheckout: true } }),
       });
     }
   };
@@ -48,6 +51,9 @@ export default function CheckoutPage() {
       [field]: value,
     }));
   };
+  if (!location.state?.fromCart) {
+    return <Navigate to="/cart" replace />;
+  }
 
   return (
     <div className="flex-1 w-full min-h-screen px-6 py-8 bg-gray-50">
