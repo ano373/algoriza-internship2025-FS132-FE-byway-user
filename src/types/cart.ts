@@ -22,3 +22,9 @@ export type GetCart = {
 export type GetCartResponse = ApiResponse<GetCart>;
 
 export type CartCountResponse = ApiResponse<{ cartItemsCount: number }>;
+
+export type PaymentCardRequest = {
+  cardNumber: string;
+  cardHolderName: string;
+  expiryDate: string;
+};

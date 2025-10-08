@@ -48,6 +48,7 @@ export default function CartPage() {
               ))}
             </div>
             <div className="w-80">
+              <h2 className="text-lg font-semibold mb-4">Order Details</h2>
               <OrderDetails
                 price={cart.cost}
                 tax={cart.tax}

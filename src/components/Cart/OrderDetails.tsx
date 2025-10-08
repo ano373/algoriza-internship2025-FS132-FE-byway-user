@@ -9,7 +9,6 @@ interface OrderDetailsProps {
 export function OrderDetails({ price, tax, total }: OrderDetailsProps) {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg p-5 font-sans text-gray-900">
-      <h2 className="text-lg font-semibold mb-4">Order Details</h2>
       <div className="space-y-3">
         <div className="flex justify-between text-sm">
           <span>Price</span>

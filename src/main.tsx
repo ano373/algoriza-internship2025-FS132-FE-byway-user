@@ -14,7 +14,7 @@ import { LayoutWith_Header } from "./components/UI/LayoutWith_Header.tsx";
 import CoursePage from "./pages/CoursePage.tsx";
 import CartPage from "./pages/CartPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
-import CheckOutPage from "./pages/CheckOutPage.tsx";
+import CheckOutPage from "./pages/CheckoutPage.tsx";
 
 const router = createBrowserRouter([
   {
