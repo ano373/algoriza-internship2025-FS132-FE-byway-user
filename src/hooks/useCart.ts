@@ -5,7 +5,6 @@ import type {
   DeleteCartItemRequest,
   GetCartResponse,
   PaymentCardRequest,
-  purchaseCartResponse,
 } from "@/types/cart";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 

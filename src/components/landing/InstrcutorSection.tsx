@@ -1,9 +1,5 @@
 import { useInstructors } from "@/hooks/useInstructors";
-import {
-  JobTitles,
-  type InstructorParameters,
-  type JobTitle,
-} from "@/types/Instrcutor";
+import { type InstructorParameters } from "@/types/Instrcutor";
 import { LoadingSpinner } from "../UI/LoadingSpinner";
 import { ErrorMessage } from "../UI/ErrorMessage";
 import { useState } from "react";
