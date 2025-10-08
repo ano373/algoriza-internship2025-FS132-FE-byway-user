@@ -1,5 +1,4 @@
 import type { PaymentCardRequest, PaymentCardRequestError } from "@/types/cart";
-import { containsNumbers } from "../helpers";
 
 export function validatePaymentCard(
   data: PaymentCardRequest
