@@ -35,7 +35,7 @@ export default function SignUpPage() {
     if (Object.keys(errors).length == 0) {
       setErrors({});
       signUpMutation.mutate(formData, {
-        onSuccess: () => navigate("/testpage"),
+        onSuccess: () => navigate("/"),
       });
     }
   };

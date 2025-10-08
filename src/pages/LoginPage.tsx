@@ -45,7 +45,7 @@ export default function LoginPage() {
 
     setErrors({});
     loginMutation.mutate(payload, {
-      onSuccess: () => navigate("/testpage"),
+      onSuccess: () => navigate("/"),
     });
   };
 
