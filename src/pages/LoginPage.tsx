@@ -1,4 +1,3 @@
-import login_illustration from "@/assets/login_illustration.jpg";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FormField } from "@components/UI/FormField";
 import { useLogin } from "@/hooks/useAuth";
@@ -98,7 +97,7 @@ export default function LoginPage() {
 
       <div className="flex items-center justify-center">
         <img
-          src={login_illustration}
+          src="./login_illustration.jpg"
           alt="Login illustration"
           className="max-h-screen object-contain"
         />

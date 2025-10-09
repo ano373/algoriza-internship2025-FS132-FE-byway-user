@@ -2,7 +2,6 @@ import { FormField } from "@/components/UI/FormField";
 import AuthMediaSection from "@/components/UI/StaticSections/AuthMediaSection";
 import { useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
-import Signup_illustration from "@/assets/Signup_illustration.jpg";
 import type { SignUpRequest, SignUpRequestError } from "@/types/auth";
 import { useNavigate } from "react-router";
 import { validateUser } from "@/lib/validators/userValidator";
@@ -44,7 +43,7 @@ export default function SignUpPage() {
     <div className="flex h-full">
       <div className="hidden md:flex w-2/5 items-center justify-center bg-gray-50 overflow-hidden">
         <img
-          src={Signup_illustration}
+          src="./Signup_illustration.jpg"
           alt="SignUp illustration"
           className="h-full w-full object-cover"
         />

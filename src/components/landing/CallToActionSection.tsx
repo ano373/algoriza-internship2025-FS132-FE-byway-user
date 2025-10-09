@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom"; // use react-router-dom
-import callToaction_1 from "@/assets/callToaction_1.png";
-import callToaction_2 from "@/assets/callToaction_2.png";
 
 export default function CallToActionSection({
   leftHeading = "Become an Instructor",
@@ -13,7 +11,7 @@ export default function CallToActionSection({
       <div className="flex flex-col md:flex-row items-center md:items-center gap-8">
         <div className="flex-1 flex justify-center md:justify-start">
           <img
-            src={callToaction_1}
+            src="./callToaction_1.png"
             alt="instructor placeholder"
             className="w-72 md:w-96 h-auto object-contain"
           />
@@ -54,7 +52,7 @@ export default function CallToActionSection({
 
         <div className="flex-1 flex justify-center md:justify-end order-1 md:order-2">
           <img
-            src={callToaction_2}
+            src="./callToaction_2.png"
             alt="learner placeholder"
             className="w-72 md:w-96 h-auto object-contain"
           />

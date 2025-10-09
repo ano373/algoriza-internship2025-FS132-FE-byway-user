@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle, FaMicrosoft } from "react-icons/fa";
-import Byway_logo from "@/assets/Byway_logo.png";
 import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
@@ -14,7 +13,7 @@ export default function Footer() {
         <div className="w-full grid grid-cols-4  gap-8">
           <div className="flex flex-col">
             <div className="flex items-center gap-0.5 mb-6">
-              <img src={Byway_logo} alt="logo" className="w-10 h-10" />
+              <img src="./Byway_logo.png" alt="logo" className="w-10 h-10" />
 
               <span className="text-xl flex-1 font-bold text-white">ByWay</span>
             </div>
