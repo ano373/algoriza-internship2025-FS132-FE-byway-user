@@ -61,6 +61,8 @@ export function CourseListPage() {
     params.set("page", pagination.page.toString());
     params.set("limit", pagination.limit.toString());
 
+    params.delete("categories");
+
     debouncedFilters.categories.forEach((cat) => {
       params.append("categories", String(cat));
     });
