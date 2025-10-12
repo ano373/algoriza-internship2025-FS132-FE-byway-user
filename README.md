@@ -1,74 +1,111 @@
-# React + TypeScript + Vite
+# ByWay User Panel (React + Typescript)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🧩 Overview
 
-Currently, two official plugins are available:
+The ByWay User Panel is a web application that allows users to browse and buy courses, view instructor details . It connects to an external .NET Core backend for all data operations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Features include:
 
-## React Compiler
+* Browse available courses
+* View course details and instructors
+* Add/remove courses from cart
+* Checkout and purchase courses
+* Toast notifications for success/error events
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## 🚀 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Framework:** React 19 & Typescript
+* **State & Data Fetching:** TanStack Query & jotai
+* **Notifications:** React Hot Toast
+* **Styling:** Tailwind CSS
+* **HTTP Client:** Axios
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Folder Structure
+
+```
+src/
+ ┣ components/       
+ ┣ pages/           
+ ┣ hooks/            # Custom hooks (data fetching, utils)
+ ┣ api/              # Axios API calls
+ ┣ atoms/            # Jotai atoms for global state management
+ ┣ lib/              # Helper functions and validators
+ ┃   ┗ validators/   # Form/input validation functions
+ ┣ types/            
+ ┗ Main.tsx          # Entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Setup & Installation
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
+
+* Node.js >= 19
+* npm
+
+### Installation
+
+```bash
+# Clone the repo
+git clone git@github.com:ano373/algoriza-internship2025-FS132-FE-byway-user.git
+cd algoriza-internship2025-FS132-FE-byway-user
+
+# Install dependencies
+npm install
 ```
-# ByWay_Algoriza-User
+
+### Run Locally
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🌐 Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```
+REACT_APP_API_BASE_URL=https://your-backend-url.com/api
+```
+
+---
+
+## 🧪 Scripts
+
+| Command         | Description                      |
+| --------------- | -------------------------------- |
+| `npm run dev`   | Start the development server     |
+| `npm run build` | Build the project for production |
+
+---
+
+## 🔗 API Integration
+
+The user panel interacts with a .NET Core backend. Example endpoints include:
+
+* `GET /courses` – Retrieve all courses
+* `GET /courses/:id` – Retrieve course details
+* `POST /cart` – Add a course to the cart
+* `GET /cart` – Retrieve cart contents
+* `DELETE /cart/:itemId` – Remove item from cart
+* `POST /checkout` – Purchase courses in the cart
+
+All requests are handled using Axios, and caching is managed with TanStack Query.
+
+---
+
+## 🪪 License
+
+MIT License
+
+
